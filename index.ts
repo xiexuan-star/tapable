@@ -7,14 +7,15 @@ import {
 
 // ------------------------------------ 同步Hook ---------------------------------
 // 最常规的钩子
-// const syncHook = new SyncHook(['name']);
-// syncHook.tap('car', (name) => {
-//   console.log(name + '1');
-// });
-// syncHook.tap('car', (name) => {
-//   console.log(name + '2');
-// });
-// syncHook.call('bus');
+const syncHook = new SyncHook(['name']);
+syncHook.tap('car', (name) => {
+  console.log(name + '1');
+});
+syncHook.tap('car', (name) => {
+  console.log(name + '2');
+});
+syncHook.call('bus');
+console.log(syncHook)
 //
 // // 带有保险功能的钩子
 // const syncBailHook = new SyncBailHook(['name']);
@@ -220,15 +221,15 @@ import {
 // interceptorHook.call('ship');
 
 // ------------------------------------ HookMap ---------------------------------
-const keyedHook = new HookMap(() => new SyncHook(['name']));
-keyedHook.for('hookKey1').tap('car', name => console.log(name));
-keyedHook.for('hookKey2').tap('car', name => console.log(name));
-keyedHook.for('hookKey3').tap('car', name => console.log(name));
-keyedHook.intercept({
-  factory: (key, hook) => {
-    console.log(key, hook);
-    if (hook) return hook;
-    return new SyncHook(['name']);
-  }
-});
-console.log(keyedHook.get('hookKey3'));
+// const keyedHook = new HookMap(() => new SyncHook(['name']));
+// keyedHook.intercept({
+//   // factory interceptor 为for函数创建hook时自定义添加额外内容
+//   factory: (key, hook) => {
+//     console.log(key, hook);
+//     if (hook) return hook;
+//     return new SyncHook(['name']);
+//   }
+// });
+// keyedHook.for('hookKey1').tap('car', name => console.log(name));
+// keyedHook.for('hookKey2').tap('car', name => console.log(name));
+// keyedHook.for('hookKey3').tap('car', name => console.log(name));
